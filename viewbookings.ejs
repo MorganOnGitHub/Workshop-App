@@ -1,0 +1,42 @@
+<%- include('navbar') %>
+<div id="view-bookings">
+    <h2 id="view-title">View Bookings</h2>
+    <form method="post" id="search_by">
+        <h3>Search by Name and Date</h3>
+        <br>
+        <input type="text" name="user_name" placeholder="John Doe">
+        <input type="date" name="start_date">
+        <input type="date" name="end_date">
+        <input type="submit">
+        <br><br>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Date of Booking</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% bookings.forEach(booking => { %>
+                <tr>
+                    <td><%= booking.name %></td>
+                    <td><%= booking.email %></td>
+                    <td><%= booking.phone_number %></td>
+                    <td><%= booking.date_booking.toDateString() %></td>
+                    <td>
+                        <form style="display: inline;" action="/edit/<%= booking._id %>" method="GET">
+                            <button type="submit">Edit</button>
+                        </form>
+                        <form style="display: inline;" action="/delete/<%= booking._id %>" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
